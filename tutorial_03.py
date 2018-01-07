@@ -1,6 +1,7 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import numpy as np
+# 线性回归模拟
 
 # fetch and feed
 node1 = tf.constant(3.0)
