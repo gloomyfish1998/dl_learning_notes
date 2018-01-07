@@ -14,8 +14,8 @@ y = tf.placeholder(dtype=tf.float32)
 line_model = W*x+b
 
 # 定义线性回归数据
-x_train = [1, 2, 3, 4, 5]
-y_train = [4, 6, 8, 10, 11]
+x_train = [1, 2, 3, 4, 5, 6, 7, 8]
+y_train = [4, 6, 8, 10, 11, 14, 16, 18]
 # 全局初始化
 init = tf.global_variables_initializer()
 
@@ -38,7 +38,7 @@ with tf.Session() as sess:
     print("Final counter : ", sess.run(counter))
 
     square_model = tf.square(line_model - y)
-    loss = tf.reduce_sum(square_model)
+    loss = tf.reduce_mean(square_model)
     print(sess.run(loss, {x:x_train, y:y_train}))
 
     # 使用梯度下降求解线性回归问题
