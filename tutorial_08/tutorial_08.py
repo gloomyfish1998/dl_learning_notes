@@ -11,8 +11,8 @@ x_data = np.linspace(-.8, .8, 500)[:,np.newaxis]
 noise = np.random.normal(0, 0.02, x_data.shape)
 y_data = np.square(x_data) + noise
 
-x_data = np.float32(x_data)
-y_data = np.float32(y_data)
+#x_data = np.float32(x_data)
+#y_data = np.float32(y_data)
 
 x_input = tf.placeholder(shape=[None, 1], dtype=tf.float32)
 y_input = tf.placeholder(shape=[None, 1], dtype=tf.float32)
