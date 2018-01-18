@@ -1,18 +1,18 @@
-### Tensorflow Learn Records
-based on my learning experience, put all basic knowledge about tensorflow
-- how to use Variable, Constants, Placeholder
-- how to initialize the data
-- how to train data and use train result
-- i'm new on tensorflow, please feel free to correct me if any
+### Tensorflow教程
+初学者入门学习最好的tensorflow学习教程，后期会加上PDF讲解。帮助大家入门tensorflow框架与深度学习。教程由浅入深，从最基础的tensor概念，简单操作演示，数据读取与使用，线性回归，非线性回归，逻辑回归，神经网络，卷积神经网络，各种激活函数，随机与批量梯度下降，准确率与损失曲线显示，mnist数据集训练与测试，结合opencv,matplot等使用!
 
-### Tutorial
-- tutorial_01 - 简单操作、常量、变量、占位符操作， session初始化，全局变量初始化
-- tutorial_02 - 计数器操作，简单线性回归操作与plot显示
-- tutorial_03 - 随机线性回归操作，使用reduce_means而不是reduce_sum，因为循环数目过大，sum值太高，导致NaN，使用reduce_mean作为损失函数可以避免
+### 联系方式
+- QQ:57558865
+- 微信:gloomy_fish
+- E-Mail: 57558865@qq.com
 
-### Contact
-QQ:57558865
+### 个人简历
+2004毕业于山东大学齐鲁软件学院，软件工程专业。主要专注于图像处理算法学习与研究，计算机视觉技术开发应用，深度学习在计算机视觉领域应用。两本书籍《Java数字图像处理-编程技巧与应用实践》、《OpenCV OnAndroid编程实践》作者、CSDN博客专家、51CTO学院特级讲师、专注图像处理与计算机视觉领域研究与开发多年、专业技术博客访问量超过200万次、精通OpenCV、ImageJ开源框架、图像对象检测与识别等应用开发技术。在对象检测、医学细胞检测与识别、文本处理、图像搜索、人脸美化算法方面有深入研究、开发过多个图像处理算法模块并成功应用在医学检测与工业领域
 
-WeChat:gloomy_fish
+### 51CTO学院视频课程地址：
+http://edu.51cto.com/lecturer/8837804.html
 
-E-Mail: 57558865
+### 新浪微博：
+http://weibo.com/u/3181256271
+
+
