@@ -1,17 +1,7 @@
-# Using TensorFlow for Stylenet/NeuralStyle
-# ---------------------------------------
-#
-# We use two images, an original image and a style image
-# and try to make the original image in the style of the style image.
-#
-# Reference paper:
-# https://arxiv.org/abs/1508.06576
-#
-# Need to download the model 'imagenet-vgg-verydee-19.mat' from:
-#   http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat
 
 import scipy.io
 import scipy.misc
+from PIL import Image
 import numpy as np
 import tensorflow as tf
 from tensorflow.python.framework import ops
@@ -22,28 +12,28 @@ ops.reset_default_graph()
 sess = tf.Session()
 
 # Image Files
-original_image_file = 'D:/tensorflow/book_cover.jpg'
-style_image_file = 'D:/tensorflow/starry_night.jpg'
+original_image_file = 'D:/images/zhigang_jia.jpg'
+style_image_file = 'D:/images/wave.jpg'
 
 # Saved VGG Network path under the current project dir.
-vgg_path = 'D:/tensorflow/dataset/imagenet-vgg-verydeep-19.mat'
+vgg_path = 'D:/python/neural-style/imagenet-vgg-verydeep-19.mat'
 
 # Default Arguments
 original_image_weight = 5.0
 style_image_weight = 500.0
 regularization_weight = 100
-learning_rate = 0.001
-generations = 5000
-output_generations = 250
+learning_rate = 10
+generations = 2400
+output_generations = 100
 beta1 = 0.9
 beta2 = 0.999
 
 # Read in images
-original_image = scipy.misc.imread(original_image_file)
+content_image = scipy.misc.imread(original_image_file)
 style_image = scipy.misc.imread(style_image_file)
 
 # Get shape of target and make the style image the same
-target_shape = original_image.shape
+target_shape = content_image.shape
 style_image = scipy.misc.imresize(style_image, target_shape[1] / style_image.shape[1])
 
 # VGG-19 Layer Setup
@@ -69,8 +59,8 @@ vgg_layers = ['conv1_1', 'relu1_1',
 # Extract weights and matrix means
 def extract_net_info(path_to_params):
     vgg_data = scipy.io.loadmat(path_to_params)
-    normalization_matrix = vgg_data['normalization'][0][0][0]
-    mat_mean = np.mean(normalization_matrix, axis=(0, 1))
+    mean = vgg_data['normalization'][0][0][0]
+    mat_mean = np.mean(mean, axis=(0, 1))
     network_weights = vgg_data['layers'][0]
     return (mat_mean, network_weights)
 
@@ -96,13 +86,14 @@ def vgg_network(network_weights, init_image):
 
 
 # Here we define which layers apply to the original or style image
-original_layer = 'relu4_2'
+content_layers = 'relu4_2'
 style_layers = ['relu1_1', 'relu2_1', 'relu3_1', 'relu4_1', 'relu5_1']
 
 # Get network parameters
 normalization_mean, network_weights = extract_net_info(vgg_path)
+print(normalization_mean)
 
-shape = (1,) + original_image.shape
+shape = (1,) + content_image.shape
 style_shape = (1,) + style_image.shape
 original_features = {}
 style_features = {}
@@ -112,9 +103,9 @@ image = tf.placeholder('float', shape=shape)
 vgg_net = vgg_network(network_weights, image)
 
 # Normalize original image
-original_minus_mean = original_image - normalization_mean
+original_minus_mean = content_image - normalization_mean
 original_norm = np.array([original_minus_mean])
-original_features[original_layer] = sess.run(vgg_net[original_layer],
+original_features[content_layers] = sess.run(vgg_net[content_layers],
                                              feed_dict={image: original_norm})
 
 # Get style image network
@@ -129,17 +120,17 @@ for layer in style_layers:
     style_gram_matrix = np.matmul(layer_output.T, layer_output) / layer_output.size
     style_features[layer] = style_gram_matrix
 
-# Make Combined Image
+#  随机初始化目标图像内容
 initial = tf.random_normal(shape) * 0.256
 image = tf.Variable(initial)
 vgg_net = vgg_network(network_weights, image)
 
-# Loss
+# 计算目标图像内容与内容图像之间的差异， 内容损失
 original_loss = original_image_weight * (
-2 * tf.nn.l2_loss(vgg_net[original_layer] - original_features[original_layer]) /
-original_features[original_layer].size)
+2 * tf.nn.l2_loss(vgg_net[content_layers] - original_features[content_layers]) /
+original_features[content_layers].size)
 
-# Loss from Style Image
+# 风格损失
 style_loss = 0
 style_losses = []
 for style_layer in style_layers:
@@ -156,8 +147,7 @@ style_loss += style_image_weight * tf.reduce_sum(style_losses)
 total_var_x = sess.run(tf.reduce_prod(image[:, 1:, :, :].get_shape()))
 total_var_y = sess.run(tf.reduce_prod(image[:, :, 1:, :].get_shape()))
 first_term = regularization_weight * 2
-second_term_numerator = tf.nn.l2_loss(image[:, 1:, :, :] - image[:, :shape[1] - 1, :, :])
-second_term = second_term_numerator / total_var_y
+second_term = (tf.nn.l2_loss(image[:, 1:, :, :] - image[:, :shape[1] - 1, :, :]) / total_var_y)
 third_term = (tf.nn.l2_loss(image[:, :, 1:, :] - image[:, :, :shape[2] - 1, :]) / total_var_x)
 total_variation_loss = first_term * (second_term + third_term)
 
@@ -170,20 +160,22 @@ train_step = optimizer.minimize(loss)
 
 # Initialize Variables and start Training
 sess.run(tf.global_variables_initializer())
+saver = tf.train.Saver()
+
 for i in range(generations):
-
     sess.run(train_step)
-
     # Print update and save temporary output
     if (i + 1) % output_generations == 0:
         print('Generation {} out of {}, loss: {}'.format(i + 1, generations, sess.run(loss)))
         image_eval = sess.run(image)
-        best_image_add_mean = image_eval.reshape(shape[1:]) + normalization_mean
-        output_file = 'temp_output_{}.jpg'.format(i)
-        scipy.misc.imsave(output_file, best_image_add_mean)
+        best_image = image_eval.reshape(shape[1:]) + normalization_mean
+        temp_img = np.clip(best_image, 0, 255).astype(np.uint8)
+        output_file = 'D:/pet_data/temp_output_{}.jpg'.format(i)
+        Image.fromarray(temp_img).save(output_file, quality=95)
 
 # Save final image
 image_eval = sess.run(image)
-best_image_add_mean = image_eval.reshape(shape[1:]) + normalization_mean
-output_file = 'final_output.jpg'
-scipy.misc.imsave(output_file, best_image_add_mean)
+best_image = image_eval.reshape(shape[1:]) + normalization_mean
+output_file = 'D:/pet_data/final_output.jpg'
+img = np.clip(best_image, 0, 255).astype(np.uint8)
+Image.fromarray(img).save(output_file, quality=95)
