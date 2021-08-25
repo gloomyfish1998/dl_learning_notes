@@ -1,58 +1,53 @@
-### Tensorflow教程
-初学者入门学习最好的tensorflow学习教程，后期会加上PDF讲解。帮助大家入门tensorflow框架与深度学习。教程由浅入深，从最基础的tensor概念，简单操作演示，数据读取与使用，线性回归，非线性回归，逻辑回归，神经网络，卷积神经网络，各种激活函数，随机与批量梯度下降，准确率与损失曲线显示，mnist数据集训练与测试，结合opencv,matplot等使用!
+# OpenCV课程资料
 
-## 贾志刚
-2004毕业于山东大学齐鲁软件学院，软件工程专业。主要专注于图像处理算法学习与研究，计算机视觉技术应用开发，深度学习在计算机视觉领域应用。两本书籍《Java数字图像处理-编程技巧与应用实践》、《OpenCV Android开发实战》作者、51CTO学院特级讲师、CSDN博客专家、专注图像处理与计算机视觉领域研究与开发多年、专业技术博客访问量超过300万次、精通OpenCV、ImageJ开源框架、图像对象检测与识别等应用开发技术。在对象检测、医学细胞检测与识别、文本处理、图像搜索、人脸美化算法方面有深入研究、开发过多个图像处理算法模块并成功应用在医学检测与工业领域。
+#### 内容介绍
+此仓库主要是B站课程的图像资料与源码下载！此外还包括我在51CTO，网易云课堂，CSDN学院上课程的图像与视频数据资料！
+同时还有大量的C++与Python的OpenCV算法演示代码，极具参考价值！
+
+#### B站视频学习
+我录制了30课时的OPenCV4 C++版本的免费视频，在B站
+提供给大家免费学习，需要直接点击下面地址即可
+OpenCV4.x  C++快速入门视频教程
+https://www.bilibili.com/video/BV1i54y1m7tw
+
+更多视频教程搜索B站【OpenCV学堂】
+
+### OpenCV4 系统化学习路线图专题（C++）
+- <b>OpenCV开发基础</b><br>
+掌握图象与视频读写，基础函数知识，HighGUI与Core模块像素操作，图形操作，图象统计信息与直方图相关应用。
+- <b>图象卷积</b><br>
+理解图象卷积概念与相关函数知识，掌握常见的模糊、锐化、增强、去噪、梯度等卷积操作
+- <b>二值图象分析</b><br>
+掌握图象二值化各种方法与技巧，学会CCL，轮廓发现，对象测量，轮廓分析，直线与圆检测等二值分析方法，掌握图象形态学应用操作技巧
+- <b>视频分析</b><br>
+掌握图象色彩空间转化技巧，视频背景提取、角点特征与光流分析法、理解颜色对象跟踪、光流跟踪、均值迁移跟踪等算法原理与代码演示
+- <b>特征提取</b><br>
+掌握图象特征提取的基本方法与相关函数知识，理解ORB特征描述子、SIFT特征描述子提取原理，图象透视变换与特征匹配基本原理与应用演示
+- <b>深度神经网络</b><br>
+掌握OpenCV DNN模块基于深度神经网络的对象检测模型的推理调用与输出解析，包括SSD、Faster-RCNN、YOLOv4、高实时人脸检测模型的使用与加速技巧。
+- <b>经典案例实战</b><br>
+星云测量与编码、工业刀片缺陷检测、自定义对象检测、二维码定位检测
+图像分割与色彩提取、文档处理与对齐、图象对齐与拼接、条码标签有无检测与定位
+- <b>资料与服务</b><br>
+整个路线图课程提供了大量的案例实战与课后作业，并提供全部原代码与答疑服务！
+
+- <b>适合人群：</b><br>
+主要针对传统图象处理与深度学习模型部署使用，主要适合懂深度学习，但是不懂传统图象处理的人群，或者需要深入系统化学习OpenCV的开发者。
+
+- <b>扫码查看课程目录与学习！</b><br>
 
 
-### 欢迎大家加入人工智能计算机视觉与深度学习社区
-### OpenCV研习社
-加入即送400+计算机视觉与深度学习论文。
-- 每周一到每周五分享OpenCV/tensorflow知识点学习（音频+文字+源码）
-- OpenCV+tensorflow真实案例代码分享
-- 直接向老师提问、每天答疑辅导
-- 系统化学习约300个知识点，从易到难、由浅入深
-- 计算机视觉与深度学习知识长文分享
-- 每天不到3毛钱，拥抱人工智能时代
-- Python与C++双语知识点分享
-- 建立计算机视觉相关人脉，认识更多同行，一起学习交流！
-- 计算机视觉论文PDF与学习资料PPT分享
-少看一场电影，少吃一顿大餐，就可以加持未来，99元学习就可以做到！
-![](ZSXQ.png)
+![](OpenCV4_MAP.jpg)
+![](OpenCV4_roadmap.jpg)
 
 
-## 视频课程
-
-| 课程名称        | 语言          | 地址         |
-| ------------- |:-------------:| :-------------:|
-| Tensorflow Object Detection API对象检测教程| Python| http://edu.51cto.com/course/15208.html |
-| Tensorflow零基础入门课程| Python| http://edu.51cto.com/course/14584.html |
-| OpenCV Python图像与视频分析教程| Python| http://edu.51cto.com/course/14029.html |
-| OpenCV Python图像处理进阶教程视频课程| Python| http://edu.51cto.com/course/13789.html |
-| OpenCV Python零基础入门视频教程| Python| http://edu.51cto.com/course/13680.html |
-| OpenCV4Android摄像头应用案例实战频教程| Android| http://edu.51cto.com/course/12700.html |
-| Python+OpenCV3.3图像处理视频教程| Python| http://edu.51cto.com/course/11324.html |
-| OpenCV3.3深度神经网络(DNN)模块-应用视频教程| C++| http://edu.51cto.com/course/11516.html |
-| 人工智能之OpenCV人脸识别案例实战视频教程| C++| http://edu.51cto.com/course/10759.html |
-| OpenCV图像分割实战视频教程|C++| http://edu.51cto.com/course/10166.html |
-| OpenCV视频分析与对象跟踪实战教程|C++| http://edu.51cto.com/course/8837.html |
-| OpenCV级联分类器训练与使用实战教程|C++| http://edu.51cto.com/course/8645.html |
-| OpenCV图像处理-小案例实战教程|C++| http://edu.51cto.com/course/8354.html |
-| OpenCV 特征提取与检测实战视频课程|C++| http://edu.51cto.com/course/8305.html |
-| OpenCV图像处理视频课程|C++| http://edu.51cto.com/course/7521.html |
-| OpenCV For Android基础入门实战视频课程|Android | http://edu.51cto.com/course/8012.html |
-| OpenCV3.2应用实战系列视频课程-Android平台银行卡卡号识别|Android| http://edu.51cto.com/course/9170.html |
-| OpenCV3.2服务器端图像处理与Java图像处理视频教程|Java| http://edu.51cto.com/course/10475.html |
-| 数字图像处理-二值图像分析视频课程(Java语言描述)|Java| http://edu.51cto.com/course/6901.html |
-| 数字图像处理-空间域卷积(Java语言描述)视频课程|Java| http://edu.51cto.com/course/6464.html |
-| 数字图像处理-基础入门视频课程(Java语言描述)|Java| http://edu.51cto.com/course/6335.html |
 
 ## 联系方式
 QQ:57558865 注明：opencv即可
 
 邮件:57558865@qq.com
 
-微信：gloomy_fish 注明 合作
+微信：bfnh2qxx 注明 合作
 
 <b>非技术合作请勿加微信</b>
 
@@ -60,9 +55,8 @@ QQ:57558865 注明：opencv即可
 
 CSDN博客地址： http://blog.csdn.net/jia20003
 
-51CTO学院课程主页：http://edu.51cto.com/lecturer/8837804.html 
+腾讯课堂主页：https://opencvxuetang.ke.qq.com/
+![](xuetang.jpg)
 
 ### OpenCV学堂 微信公众号
 ![](CVSCHOOL.jpg)
-
-
